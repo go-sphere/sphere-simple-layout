@@ -35,7 +35,7 @@ INTERNAL_TOOLS  ?= $(GO) run -tags spheretools
 
 .PHONY: \
 	build build/all clean\
-	gen/wire gen/conf gen/proto gen/all \
+	gen/wire gen/proto gen/all \
 	build/docker build/multi-docker \
 	run deploy lint fmt \
 	install init help
@@ -62,9 +62,6 @@ clean: ## Clean gen code and build files
 gen/wire: ## Generate wire code
 	cd cmd/app/ && $(WIRE_CLI) gen
 
-gen/conf: ## Generate example config
-	$(INTERNAL_TOOLS) ./cmd/tools/config gen
-
 gen/proto: ## Generate proto files and run protoc plugins
 	$(BUF_CLI) dep update
 	$(BUF_CLI) dep prune
@@ -72,7 +69,7 @@ gen/proto: ## Generate proto files and run protoc plugins
 	$(BUF_CLI) generate --template buf.binding.yaml
 
 
-gen/all: clean gen/wire gen/proto fmt ## Generate all code (ent, docs, wire)
+gen/all: clean gen/wire gen/proto fmt ## Generate all code
 
 # ---------- Build Docker ----------
 build/docker: ## Build docker image
