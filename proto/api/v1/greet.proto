@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package api.v1;
+
+import "buf/validate/validate.proto";
+import "google/api/annotations.proto";
+import "sphere/errors/errors.proto";
+
+service GreetService {
+  rpc Greet(GreetRequest) returns (GreetResponse) {
+    option (google.api.http) = {
+      post: "/v1/greet"
+      body: "*"
+    };
+  }
+}
+
+message GreetRequest {
+  string name = 1 [(buf.validate.field).string = {
+    min_len: 1
+    max_len: 100
+  }];
+}
+
+message GreetResponse {
+  string message = 1;
+}
+
+// Error definitions
+enum GreetError {
+  option (sphere.errors.default_status) = 500;
+
+  GREET_ERROR_UNSPECIFIED = 0;
+  GREET_ERROR_NAME_TOO_LONG = 1000 [(sphere.errors.options) = {
+    status: 400
+    message: "Name exceeds maximum length"
+  }];
+}
