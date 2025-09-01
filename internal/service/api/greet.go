@@ -11,6 +11,6 @@ var _ apiv1.GreetServiceHTTPServer = (*Service)(nil)
 
 func (s *Service) Greet(ctx context.Context, request *apiv1.GreetRequest) (*apiv1.GreetResponse, error) {
 	return &apiv1.GreetResponse{
-		Message: fmt.Sprintf("Hello, %s!", request.Name),
+		Message: fmt.Sprintf("Hello %s %s!", request.Title, request.Name),
 	}, nil
 }

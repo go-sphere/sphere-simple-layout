@@ -7,6 +7,7 @@ require (
 	buf.build/go/protovalidate v0.14.0
 	github.com/TBXark/confstore v0.0.5
 	github.com/gin-gonic/gin v1.10.1
+	github.com/go-sphere/binding v0.0.1
 	github.com/go-sphere/errors v0.0.1
 	github.com/go-sphere/sphere v0.0.1
 	github.com/google/wire v0.7.0

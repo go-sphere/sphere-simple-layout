@@ -28,7 +28,7 @@ func (w *Web) Identifier() string {
 }
 
 func (w *Web) Start(ctx context.Context) error {
-	engine := gin.New()
+	engine := gin.Default()
 	apiv1.RegisterGreetServiceHTTPServer(engine, w.service)
 	w.server = &http.Server{
 		Addr:    w.config.HTTP.Address,
