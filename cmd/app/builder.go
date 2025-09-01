@@ -5,9 +5,7 @@ import (
 	"github.com/go-sphere/sphere/core/boot"
 )
 
-func newApplication(
-	api *api.Web,
-) *boot.Application {
+func newApplication(api *api.Web) *boot.Application {
 	return boot.NewApplication(
 		api,
 	)
