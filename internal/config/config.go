@@ -7,6 +7,8 @@ import (
 	"github.com/go-sphere/confstore"
 	"github.com/go-sphere/confstore/codec"
 	"github.com/go-sphere/confstore/provider"
+	"github.com/go-sphere/confstore/provider/file"
+	"github.com/go-sphere/confstore/provider/http"
 	"github.com/go-sphere/sphere-simple-layout/internal/server/api"
 	"github.com/go-sphere/sphere/log"
 	"github.com/go-sphere/sphere/utils/secure"
@@ -50,11 +52,11 @@ func setDefaultConfig(config *Config) *Config {
 }
 
 func newConfProvider(path string) (provider.Provider, error) {
-	if provider.IsRemoteURL(path) {
-		return provider.NewHTTP(path, provider.WithTimeout(10)), nil
+	if http.IsRemoteURL(path) {
+		return http.New(path, http.WithTimeout(10)), nil
 	}
-	if provider.IsLocalPath(path) {
-		return provider.NewFile(path, provider.WithExpandEnv()), nil
+	if file.IsLocalPath(path) {
+		return file.New(path, file.WithExpandEnv()), nil
 	}
 	return nil, errors.New("unsupported config path")
 }
