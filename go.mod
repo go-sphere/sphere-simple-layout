@@ -9,7 +9,7 @@ require (
 	github.com/go-sphere/binding v0.0.2
 	github.com/go-sphere/confstore v0.0.4
 	github.com/go-sphere/errors v0.0.1
-	github.com/go-sphere/sphere v0.0.1
+	github.com/go-sphere/sphere v0.0.2-beta.2
 	github.com/google/wire v0.7.0
 	google.golang.org/genproto/googleapis/api v0.0.0-20251124214823-79d6a2a48846
 	google.golang.org/protobuf v1.36.10
@@ -25,7 +25,7 @@ require (
 	github.com/fatih/structtag v1.2.0 // indirect
 	github.com/gabriel-vasile/mimetype v1.4.11 // indirect
 	github.com/gin-contrib/sse v1.1.0 // indirect
-	github.com/go-playground/form/v4 v4.2.1 // indirect
+	github.com/go-playground/form/v4 v4.3.0 // indirect
 	github.com/go-playground/locales v0.14.1 // indirect
 	github.com/go-playground/universal-translator v0.18.1 // indirect
 	github.com/go-playground/validator/v10 v10.28.0 // indirect
@@ -44,9 +44,8 @@ require (
 	github.com/stoewer/go-strcase v1.3.1 // indirect
 	github.com/twitchyliquid64/golang-asm v0.15.1 // indirect
 	github.com/ugorji/go/codec v1.3.1 // indirect
-	go.uber.org/mock v0.6.0 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
-	go.uber.org/zap v1.27.0 // indirect
+	go.uber.org/zap v1.27.1 // indirect
 	go.uber.org/zap/exp v0.3.0 // indirect
 	golang.org/x/arch v0.23.0 // indirect
 	golang.org/x/crypto v0.45.0 // indirect
