@@ -52,8 +52,6 @@ github.com/go-sphere/httpx/fiberx v0.0.2-beta.30 h1:qU9Q9gLBd8Nj5c0RpwHL1PPQonec
 github.com/go-sphere/httpx/fiberx v0.0.2-beta.30/go.mod h1:qY5tJ4YOWKdNxInsLQ6qbCrFv21nJKw1bdbxHGBRBLM=
 github.com/go-sphere/httpx/ginx v0.0.2-beta.30 h1:ufIjllv/FdqTyIxgnXT3Rse5eTUb3CH8A/0Xk/kguVw=
 github.com/go-sphere/httpx/ginx v0.0.2-beta.30/go.mod h1:o8AH552JoyJo1Fqnvpra8WipzXXzOKwK0Q2Lwk16A7Q=
-github.com/go-sphere/sphere v0.0.3-beta.8 h1:yonfeDJEv+gkVTCHEo2XfaiBtNjDd4/aCD8SfcT+2tE=
-github.com/go-sphere/sphere v0.0.3-beta.8/go.mod h1:R5iTn1vBfEbO3sgokR3NYishsCTPlkEo9Ybns5kTsg4=
 github.com/go-sphere/sphere v0.0.3-beta.9 h1:qBZqdsRtk9ftOsMY8I0b6SPBW5kIKhSThbHpUWWaFEM=
 github.com/go-sphere/sphere v0.0.3-beta.9/go.mod h1:GOFg2D2iGH/YpSOgXLIjr3LsUCNuXeh0eZswVLDgq90=
 github.com/goccy/go-json v0.10.5 h1:Fq85nIqj+gXn/S5ahsiTlK3TmC85qgirsdTP/+DeaC4=
