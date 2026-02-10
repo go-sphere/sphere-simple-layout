@@ -13,7 +13,7 @@ require (
 	github.com/go-sphere/httpx v0.0.2-beta.30
 	github.com/go-sphere/httpx/fiberx v0.0.2-beta.30
 	github.com/go-sphere/httpx/ginx v0.0.2-beta.30
-	github.com/go-sphere/sphere v0.0.3-beta.9
+	github.com/go-sphere/sphere v0.0.3-beta.9.0.20260210060703-9a3671c51485
 	github.com/gofiber/contrib/v3/zap v1.0.0-rc.1
 	github.com/gofiber/fiber/v3 v3.0.0-rc.3
 	github.com/google/wire v0.7.0
@@ -65,7 +65,6 @@ require (
 	golang.org/x/crypto v0.47.0 // indirect
 	golang.org/x/exp v0.0.0-20260112195511-716be5621a96 // indirect
 	golang.org/x/net v0.49.0 // indirect
-	golang.org/x/sync v0.19.0 // indirect
 	golang.org/x/sys v0.40.0 // indirect
 	golang.org/x/text v0.33.0 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20260126211449-d11affda4bed // indirect

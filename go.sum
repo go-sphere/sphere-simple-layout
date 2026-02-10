@@ -52,8 +52,8 @@ github.com/go-sphere/httpx/fiberx v0.0.2-beta.30 h1:qU9Q9gLBd8Nj5c0RpwHL1PPQonec
 github.com/go-sphere/httpx/fiberx v0.0.2-beta.30/go.mod h1:qY5tJ4YOWKdNxInsLQ6qbCrFv21nJKw1bdbxHGBRBLM=
 github.com/go-sphere/httpx/ginx v0.0.2-beta.30 h1:ufIjllv/FdqTyIxgnXT3Rse5eTUb3CH8A/0Xk/kguVw=
 github.com/go-sphere/httpx/ginx v0.0.2-beta.30/go.mod h1:o8AH552JoyJo1Fqnvpra8WipzXXzOKwK0Q2Lwk16A7Q=
-github.com/go-sphere/sphere v0.0.3-beta.9 h1:qBZqdsRtk9ftOsMY8I0b6SPBW5kIKhSThbHpUWWaFEM=
-github.com/go-sphere/sphere v0.0.3-beta.9/go.mod h1:GOFg2D2iGH/YpSOgXLIjr3LsUCNuXeh0eZswVLDgq90=
+github.com/go-sphere/sphere v0.0.3-beta.9.0.20260210060703-9a3671c51485 h1:NPtMIJU7/swIaU1AQPwaC/Pn6C/Lc1WFig9MIq616mA=
+github.com/go-sphere/sphere v0.0.3-beta.9.0.20260210060703-9a3671c51485/go.mod h1:coDiNoEAHS8ydsUI5LEmPaSOxfjjNBxmiH9z/NwR2pY=
 github.com/goccy/go-json v0.10.5 h1:Fq85nIqj+gXn/S5ahsiTlK3TmC85qgirsdTP/+DeaC4=
 github.com/goccy/go-json v0.10.5/go.mod h1:oq7eo15ShAhp70Anwd5lgX2pLfOS3QCiwU/PULtXL6M=
 github.com/goccy/go-yaml v1.19.2 h1:PmFC1S6h8ljIz6gMRBopkjP1TVT7xuwrButHID66PoM=
@@ -153,8 +153,6 @@ golang.org/x/exp v0.0.0-20260112195511-716be5621a96 h1:Z/6YuSHTLOHfNFdb8zVZomZr7
 golang.org/x/exp v0.0.0-20260112195511-716be5621a96/go.mod h1:nzimsREAkjBCIEFtHiYkrJyT+2uy9YZJB7H1k68CXZU=
 golang.org/x/net v0.49.0 h1:eeHFmOGUTtaaPSGNmjBKpbng9MulQsJURQUAfUwY++o=
 golang.org/x/net v0.49.0/go.mod h1:/ysNB2EvaqvesRkuLAyjI1ycPZlQHM3q01F02UY/MV8=
-golang.org/x/sync v0.19.0 h1:vV+1eWNmZ5geRlYjzm2adRgW2/mcpevXNg50YZtPCE4=
-golang.org/x/sync v0.19.0/go.mod h1:9KTHXmSnoGruLpwFjVSX0lNNA75CykiMECbovNTZqGI=
 golang.org/x/sys v0.6.0/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
 golang.org/x/sys v0.40.0 h1:DBZZqJ2Rkml6QMQsZywtnjnnGvHza6BTfYFWY9kjEWQ=
 golang.org/x/sys v0.40.0/go.mod h1:OgkHotnGiDImocRcuBABYBEXf8A9a87e/uXjp9XT3ks=
