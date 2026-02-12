@@ -15,24 +15,24 @@ var BuildVersion = "dev"
 
 type Config struct {
 	Environments map[string]string `json:"environments" yaml:"environments"`
-	Log          *zapx.Config      `json:"log" yaml:"log"`
-	API          *api.Config       `json:"api" yaml:"api"`
+	Log          zapx.Config       `json:"log" yaml:"log"`
+	API          api.Config        `json:"api" yaml:"api"`
 }
 
-func NewEmptyConfig() *Config {
-	return &Config{
+func NewEmptyConfig() Config {
+	return Config{
 		Environments: map[string]string{},
-		Log: &zapx.Config{
-			File: &zapx.FileConfig{
+		Log: zapx.Config{
+			File: zapx.FileConfig{
 				FileName:   "./var/log/sphere.log",
 				MaxSize:    10,
 				MaxBackups: 10,
 				MaxAge:     10,
 			},
-			Console: &zapx.ConsoleConfig{},
+			Console: zapx.ConsoleConfig{},
 			Level:   "info",
 		},
-		API: &api.Config{
+		API: api.Config{
 			JWT: secure.RandString(32),
 			HTTP: api.HTTPConfig{
 				Address: "0.0.0.0:8899",
@@ -54,8 +54,8 @@ func NewConfig(path string) (*Config, error) {
 	if err != nil {
 		return nil, err
 	}
-	if config.Log == nil {
-		config.Log = zapx.NewDefaultConfig()
+	if config.Log.Level == "" {
+		config.Log.Level = "info"
 	}
 	return config, nil
 }
