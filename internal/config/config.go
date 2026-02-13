@@ -19,8 +19,8 @@ type Config struct {
 	API          api.Config        `json:"api" yaml:"api"`
 }
 
-func NewEmptyConfig() Config {
-	return Config{
+func NewEmptyConfig() *Config {
+	return &Config{
 		Environments: map[string]string{},
 		Log: zapx.Config{
 			File: zapx.FileConfig{
