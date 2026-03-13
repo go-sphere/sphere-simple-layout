@@ -6,13 +6,13 @@ require (
 	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.11-20260209202127-80ab13bee0bf.1
 	buf.build/go/protovalidate v1.1.2
 	github.com/gin-contrib/zap v1.1.6
-	github.com/gin-gonic/gin v1.11.0
+	github.com/gin-gonic/gin v1.12.0
 	github.com/go-sphere/binding v0.0.4
 	github.com/go-sphere/confstore v0.0.4
 	github.com/go-sphere/errors v0.0.1
-	github.com/go-sphere/httpx v0.0.2-beta.30.0.20260212043046-b67514f829ab
-	github.com/go-sphere/httpx/ginx v0.0.2-beta.30.0.20260212070553-e0dedc849e0d
-	github.com/go-sphere/sphere v0.0.3-beta.9.0.20260212053011-f83776ed16e6
+	github.com/go-sphere/httpx v0.0.3
+	github.com/go-sphere/httpx/ginx v0.0.3
+	github.com/go-sphere/sphere v0.0.3
 	github.com/google/wire v0.7.0
 	google.golang.org/genproto/googleapis/api v0.0.0-20260209200024-4cfbd4190f57
 	google.golang.org/protobuf v1.36.11
@@ -44,13 +44,14 @@ require (
 	github.com/quic-go/quic-go v0.59.0 // indirect
 	github.com/twitchyliquid64/golang-asm v0.15.1 // indirect
 	github.com/ugorji/go/codec v1.3.1 // indirect
+	go.mongodb.org/mongo-driver/v2 v2.5.0 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
 	go.uber.org/zap v1.27.1 // indirect
 	go.uber.org/zap/exp v0.3.0 // indirect
 	golang.org/x/arch v0.24.0 // indirect
 	golang.org/x/crypto v0.48.0 // indirect
-	golang.org/x/exp v0.0.0-20260211191109-2735e65f0518 // indirect
-	golang.org/x/net v0.50.0 // indirect
+	golang.org/x/exp v0.0.0-20260218203240-3dfff04db8fa // indirect
+	golang.org/x/net v0.51.0 // indirect
 	golang.org/x/sys v0.41.0 // indirect
 	golang.org/x/text v0.34.0 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20260209200024-4cfbd4190f57 // indirect
