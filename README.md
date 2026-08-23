@@ -14,11 +14,13 @@ Sphere build tool. Usage: make [target]
   build/all            Build for all supported platforms
   clean                Clean gen code and build files
   gen/wire             Generate wire code
+  gen/conf             Generate example config
   gen/proto            Generate proto files and run protoc plugins
   gen/all              Generate all code
   build/docker         Build docker image
   build/multi-docker   Build multi-arch docker image
   run                  Run the application
+  run/race             Run the application with the race detector
   deploy               Deploy binary
   lint                 Run linter
   fmt                  Run formatter and fix issues
