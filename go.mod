@@ -12,7 +12,7 @@ require (
 	github.com/go-sphere/errors v0.0.1
 	github.com/go-sphere/httpx v0.0.3
 	github.com/go-sphere/httpx/ginx v0.0.3
-	github.com/go-sphere/sphere v0.0.3
+	github.com/go-sphere/sphere v0.0.4
 	github.com/google/wire v0.7.0
 	google.golang.org/genproto/googleapis/api v0.0.0-20260209200024-4cfbd4190f57
 	google.golang.org/protobuf v1.36.11
