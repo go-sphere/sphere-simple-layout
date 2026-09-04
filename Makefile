@@ -1,6 +1,7 @@
 # ---------- Makefile for Sphere Project ----------
 MODULE          := $(shell go list -m)
 MODULE_NAME     ?= $(lastword $(subst /, ,$(MODULE)))
+DIRECT_DEPS_TEMPLATE := {{if and (not .Main) (not .Indirect) (not .Replace)}}{{.Path}}{{end}}
 
 # ---------- Build Config ----------
 GIT_TAG         ?= $(shell git describe --tags --always --dirty 2>/dev/null || echo dev)
@@ -32,14 +33,14 @@ BUF_CLI         ?= buf
 SWAG_CLI        ?= swag
 WIRE_CLI        ?= wire
 SPHERE_CLI      ?= sphere-cli
-GOLANG_CI_LINT  ?= golangci-lint
+GOLANGCI_LINT   ?= golangci-lint
 INTERNAL_TOOLS  ?= $(GO) run -tags spheretools
 
 .PHONY: \
 	build build/all clean\
 	gen/wire gen/conf gen/proto gen/all \
 	build/docker build/multi-docker \
-	run run/race deploy lint fmt \
+	run run/race deploy deps-update tidy test lint fmt check \
 	install init help
 
 # ---------- Build Tools ----------
@@ -75,6 +76,7 @@ gen/proto: ## Generate proto files and run protoc plugins
 	$(BUF_CLI) generate --template buf.binding.yaml
 
 gen/all: clean gen/proto gen/wire fmt ## Generate all code
+	$(MAKE) tidy
 
 # ---------- Build Docker ----------
 build/docker: ## Build docker image
@@ -106,15 +108,32 @@ run/race: ## Run the application with the race detector
 deploy: ## Deploy binary
 	./devops/deploy/deploy.sh
 
-lint: ## Run linter
-	$(GOLANG_CI_LINT) run --no-config --fix
-	$(BUF_CLI) lint
+deps-update: ## Update direct Go dependencies
+	@deps="$$(GOWORK=off $(GO) list -m -f '$(DIRECT_DEPS_TEMPLATE)' all)"; \
+	if [ -n "$$deps" ]; then GOWORK=off $(GO) get -u $$deps; fi
+	GOWORK=off $(GO) mod tidy
 
-fmt: ## Run formatter and fix issues
-	$(GO) mod tidy
+tidy: ## Tidy Go module dependencies
+	GOWORK=off $(GO) mod tidy
+
+fmt: ## Format source files
 	$(GO) fmt ./...
 	$(BUF_CLI) format -w
-	$(GOLANG_CI_LINT) fmt --no-config --enable gofmt,goimports
+	$(GOLANGCI_LINT) fmt --no-config --enable gofmt --enable goimports
+
+test: ## Run tests
+	$(GO) test ./...
+
+lint: ## Run non-mutating linters
+	$(GOLANGCI_LINT) fmt --no-config --enable gofmt --enable goimports --diff
+	$(GO) vet ./...
+	$(GOLANGCI_LINT) run --no-config
+	$(BUF_CLI) lint
+
+check: ## Run dependency, lint, and test checks
+	GOWORK=off $(GO) mod tidy -diff
+	$(MAKE) lint
+	$(MAKE) test
 
 # ---------- Install Tools ----------
 install: ## Install dependencies tools
