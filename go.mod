@@ -10,9 +10,9 @@ require (
 	github.com/go-sphere/binding v0.0.4
 	github.com/go-sphere/confstore v0.0.4
 	github.com/go-sphere/errors v0.0.1
-	github.com/go-sphere/httpx v0.0.3
-	github.com/go-sphere/httpx/ginx v0.0.3
-	github.com/go-sphere/sphere v0.0.4
+	github.com/go-sphere/httpx v0.0.4
+	github.com/go-sphere/httpx/ginx v0.0.4
+	github.com/go-sphere/sphere v0.0.5
 	github.com/google/wire v0.7.0
 	google.golang.org/genproto/googleapis/api v0.0.0-20260831171406-18b4a7587f8a
 	google.golang.org/protobuf v1.36.12
@@ -27,7 +27,7 @@ require (
 	github.com/bytedance/sonic/loader v0.5.2 // indirect
 	github.com/cloudwego/base64x v0.1.7 // indirect
 	github.com/gabriel-vasile/mimetype v1.4.15 // indirect
-	github.com/gin-contrib/sse v1.1.1 // indirect
+	github.com/gin-contrib/sse v1.1.2 // indirect
 	github.com/go-playground/locales v0.14.1 // indirect
 	github.com/go-playground/universal-translator v0.18.1 // indirect
 	github.com/go-playground/validator/v10 v10.30.4 // indirect
@@ -44,7 +44,7 @@ require (
 	github.com/quic-go/quic-go v0.62.0 // indirect
 	github.com/twitchyliquid64/golang-asm v0.15.1 // indirect
 	github.com/ugorji/go/codec v1.3.2 // indirect
-	go.mongodb.org/mongo-driver/v2 v2.8.2 // indirect
+	go.mongodb.org/mongo-driver/v2 v2.9.0 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
 	go.uber.org/zap v1.28.0 // indirect
 	go.uber.org/zap/exp v0.3.0 // indirect
