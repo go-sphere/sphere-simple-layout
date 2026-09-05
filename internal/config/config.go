@@ -1,14 +1,11 @@
 package config
 
 import (
-	"fmt"
-
 	"github.com/go-sphere/confstore"
 	"github.com/go-sphere/confstore/codec"
 	"github.com/go-sphere/confstore/provider/file"
 	"github.com/go-sphere/sphere-simple-layout/internal/server/api"
 	"github.com/go-sphere/sphere/log/zapx"
-	"github.com/go-sphere/sphere/utils/secure"
 )
 
 var BuildVersion = "dev"
@@ -33,7 +30,6 @@ func NewEmptyConfig() *Config {
 			Level:   "info",
 		},
 		API: api.Config{
-			JWT: secure.RandString(32),
 			HTTP: api.HTTPConfig{
 				Address: "0.0.0.0:8899",
 			},
@@ -48,9 +44,6 @@ func NewConfig(path string) (*Config, error) {
 	}
 	if config.Log.Level == "" {
 		config.Log.Level = "info"
-	}
-	if config.API.JWT == "" {
-		return nil, fmt.Errorf("api jwt must be non-empty")
 	}
 	return config, nil
 }

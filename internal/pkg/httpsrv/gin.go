@@ -14,12 +14,12 @@ import (
 	"github.com/go-sphere/sphere/log"
 	"github.com/go-sphere/sphere/log/zapx"
 	"github.com/go-sphere/sphere/server/httpz"
+	"github.com/go-sphere/sphere/server/middleware/cors"
 )
 
 func init() {
 	httpz.SetDefaultErrorParser(func(err error) (int32, int32, string) {
-		var ve *protovalidate.ValidationError
-		if errors.As(err, &ve) {
+		if ve, ok := errors.AsType[*protovalidate.ValidationError](err); ok {
 			msgs := make([]string, 0, len(ve.Violations))
 			for _, v := range ve.Violations {
 				msgs = append(msgs, v.Proto.GetMessage())
@@ -28,6 +28,19 @@ func init() {
 		}
 		return httpx.ParseError(err)
 	})
+}
+
+// UseCORS attaches CORS middleware when origins is non-empty.
+func UseCORS(engine httpx.Engine, origins []string) error {
+	if len(origins) == 0 {
+		return nil
+	}
+	mw, err := cors.NewCORS(cors.WithAllowOrigins(origins...))
+	if err != nil {
+		return err
+	}
+	engine.Use(mw)
+	return nil
 }
 
 type httpxContext = httpx.Context

@@ -40,7 +40,7 @@ INTERNAL_TOOLS  ?= $(GO) run -tags spheretools
 	build build/all clean\
 	gen/wire gen/conf gen/proto gen/all \
 	build/docker build/multi-docker \
-	run run/race deploy deps-update tidy test lint fmt check \
+	run run/race deps-update tidy test lint fmt check \
 	install init help
 
 # ---------- Build Tools ----------
@@ -59,8 +59,6 @@ build/all: $(addprefix build/,$(BUILD_PLATFORMS)) ## Build for all supported pla
 clean: ## Clean gen code and build files
 	rm -rf ./api/*
 	rm -rf ./build/*
-	rm -rf ./swagger/*
-	rm -rf ./internal/pkg/database/ent/*
 
 gen/wire: ## Generate wire code
 	cd cmd/app/ && $(WIRE_CLI) gen
@@ -104,9 +102,6 @@ run: ## Run the application
 
 run/race: ## Run the application with the race detector
 	$(GO_RUN_RACE) $(MODULE)/cmd/app
-
-deploy: ## Deploy binary
-	./devops/deploy/deploy.sh
 
 deps-update: ## Update direct Go dependencies
 	@deps="$$(GOWORK=off $(GO) list -m -f '$(DIRECT_DEPS_TEMPLATE)' all)"; \

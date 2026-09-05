@@ -28,6 +28,9 @@ func (w *Web) Identifier() string {
 }
 
 func (w *Web) Start(ctx context.Context) error {
+	if err := httpsrv.UseCORS(w.server, w.config.HTTP.Cors); err != nil {
+		return err
+	}
 	route := w.server.Group("/")
 	apiv1.RegisterGreetServiceHTTPServer(route, w.service)
 	return w.server.Start()

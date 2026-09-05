@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "name": "simple",
+  "upstream": {
+    "repository": "https://github.com/go-sphere/sphere-simple-layout.git",
+    "ref": "master",
+    "module": "github.com/go-sphere/sphere-simple-layout"
+  },
+  "capabilities": [
+    "protobuf",
+    "gin-http",
+    "wire"
+  ],
+  "ownership": {
+    "layout_owned": [
+      ".github/workflows/**",
+      ".dockerignore",
+      ".gitignore",
+      ".sphere/layout.json",
+      "AGENTS.md",
+      "CONTRIBUTING.md",
+      "LICENSE",
+      "buf.gen.yaml",
+      "buf.binding.yaml",
+      "buf.yaml",
+      "cmd/app/Dockerfile",
+      "cmd/tools/**",
+      "internal/pkg/app/**",
+      "internal/pkg/httpsrv/**"
+    ],
+    "mixed": [
+      "Makefile",
+      "go.mod",
+      "cmd/app/builder.go",
+      "cmd/app/main.go",
+      "cmd/app/wire.go",
+      "internal/config/**",
+      "internal/wire.go",
+      "internal/*/wire.go",
+      "internal/server/*/web.go",
+      "internal/service/api/**",
+      "proto/api/**"
+    ],
+    "generated": [
+      "api/**",
+      "build/**",
+      "var/**",
+      "config.json",
+      "config_gen.json",
+      "buf.lock",
+      "go.sum",
+      "cmd/app/wire_gen.go"
+    ],
+    "default": "project_owned"
+  }
+}

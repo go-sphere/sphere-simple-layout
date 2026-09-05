@@ -3,7 +3,7 @@ managed:
   enabled: true
   override:
     - file_option: go_package_prefix
-      value: github.com/go-sphere/sphere-simple-layout
+      value: github.com/go-sphere/sphere-simple-layout/api
 plugins:
   - local: protoc-gen-sphere-binding
     out: api
