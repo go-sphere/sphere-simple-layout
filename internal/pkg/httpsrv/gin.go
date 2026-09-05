@@ -43,18 +43,6 @@ func UseCORS(engine httpx.Engine, origins []string) error {
 	return nil
 }
 
-type httpxContext = httpx.Context
-
-type jsonErrorContext struct {
-	httpxContext
-	gc *gin.Context
-}
-
-func (c *jsonErrorContext) JSON(code int, v any) error {
-	c.gc.JSON(code, v)
-	return nil
-}
-
 // NewGinServer initializes and returns a new HTTP server engine configured with the specified address and middlewares.
 func NewGinServer(name, addr string) httpx.Engine {
 	logger := log.With(log.WithAttrs(map[string]any{"module": name}), log.DisableCaller())
@@ -68,9 +56,7 @@ func NewGinServer(name, addr string) httpx.Engine {
 	app := ginx.New(
 		ginx.WithEngine(engine),
 		ginx.WithServerAddr(addr),
-		ginx.WithErrorHandler(func(gc *gin.Context, err error) {
-			httpz.AbortWithJsonError(&jsonErrorContext{gc: gc}, err)
-		}),
+		ginx.WithHTTPXErrorHandler(httpz.AbortWithJsonError),
 	)
 	return app
 }
