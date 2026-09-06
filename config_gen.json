@@ -1,0 +1,21 @@
+{
+  "environments": {},
+  "log": {
+    "file": {
+      "file_name": "./var/log/sphere.log",
+      "max_size": 10,
+      "max_backups": 10,
+      "max_age": 10
+    },
+    "console": {
+      "disable": false
+    },
+    "level": "info"
+  },
+  "api": {
+    "http": {
+      "address": "0.0.0.0:8899",
+      "cors": null
+    }
+  }
+}
