@@ -5,14 +5,13 @@ go 1.26.8
 require (
 	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.12-20260825204119-511051f7f437.2
 	buf.build/go/protovalidate v1.4.0
-	github.com/gin-contrib/zap v1.1.7
 	github.com/gin-gonic/gin v1.12.0
 	github.com/go-sphere/binding v0.0.4
 	github.com/go-sphere/confstore v0.0.4
 	github.com/go-sphere/errors v0.0.1
 	github.com/go-sphere/httpx v0.0.4
 	github.com/go-sphere/httpx/ginx v0.0.4
-	github.com/go-sphere/sphere v0.0.5
+	github.com/go-sphere/sphere v0.0.6-0.20260906140008-0292cf303e83
 	github.com/google/wire v0.7.0
 	google.golang.org/genproto/googleapis/api v0.0.0-20260831171406-18b4a7587f8a
 	google.golang.org/protobuf v1.36.12
