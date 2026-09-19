@@ -18,7 +18,7 @@ type Web struct {
 func NewWebServer(conf Config, service *api.Service) *Web {
 	return &Web{
 		config:  conf,
-		server:  httpsrv.NewGinServer("api", conf.HTTP.Address),
+		server:  httpsrv.NewServer("api", conf.HTTP.Address),
 		service: service,
 	}
 }

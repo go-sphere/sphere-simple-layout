@@ -2,9 +2,9 @@
 
 ## Layout Profile
 
-This is the minimal Sphere layout: Protobuf/Buf, generated HTTP handlers, Gin,
-Wire, Docker, and one greet example. It has no database, authentication,
-Swagger, dashboard, Telegram, WeChat, or deployment scripts.
+This is the minimal Sphere layout: Protobuf/Buf, generated HTTP handlers on
+stdx (net/http), Wire, Docker, and one greet example. It has no database,
+authentication, Swagger, dashboard, Telegram, WeChat, or deployment scripts.
 
 ## Ownership and Extension
 
@@ -17,8 +17,8 @@ Add contracts under `proto/<domain>/v1`, business logic under
 `internal/service/<domain>`. Product logic must not be placed in layout-owned
 CI, generation, app-bootstrap, or HTTP-adapter files.
 
-The canonical family rules and AI update algorithm live in
-`sphere-layout/docs/LAYOUT_CONTRACT.md`.
+See `docs/LAYOUT_CONTRACT.md` for the complete authoring and synchronization
+protocol, including legacy-project adoption and conflict handling.
 
 ## Workflow
 

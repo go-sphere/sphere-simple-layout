@@ -8,7 +8,7 @@
   },
   "capabilities": [
     "protobuf",
-    "gin-http",
+    "stdx-http",
     "wire"
   ],
   "ownership": {
@@ -25,6 +25,7 @@
       "buf.yaml",
       "cmd/app/Dockerfile",
       "cmd/tools/**",
+      "docs/LAYOUT_CONTRACT.md",
       "internal/pkg/app/**",
       "internal/pkg/httpsrv/**"
     ],
