@@ -26,6 +26,9 @@ protocol, including legacy-project adoption and conflict handling.
 - `make test` runs Go tests.
 - `make lint` checks Go and Buf without rewriting files.
 - `make check` verifies dependencies, formatting, lint, and tests.
+- `make codegen-check` compares generated `api/**` with the tracked
+  `codegen.sha256` baseline; refresh it with `make codegen-baseline` after
+  Proto changes or a generator bump in `codegen.versions`, and commit it.
 - `make build` builds the application.
 
 After changing constructors, provider sets, or Proto, regenerate before

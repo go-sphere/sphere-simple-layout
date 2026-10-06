@@ -35,6 +35,24 @@ During development use `make gen/all`, `make check`, and `make build`. Run
 Read `.sphere/layout.json` and `AGENTS.md` before extending or synchronizing the
 layout. Unclassified paths are project-owned by default.
 
+## Generator Versions and Codegen Baseline
+
+`codegen.versions` pins every tool `make install` installs: the go-sphere
+protoc plugins, Buf, protoc-gen-go, Swag, Wire, golangci-lint, and sphere-cli.
+Change versions only there; the Makefile and the codegen scripts both read it.
+
+Generated `api/**` is not committed, so `codegen.sha256` records the SHA-256
+of every generated `api/**` file as the tracked regression baseline:
+
+- `make codegen-check` compares the current `api/**` with the baseline.
+- `make codegen-baseline` rewrites the baseline from the current `api/**`.
+
+After changing Proto files or bumping a generator, run
+`make install && make gen/all && make codegen-baseline` and commit
+`codegen.sha256` with the change, so reviewers see which generated files
+moved. A failing check without such a change means the installed tools do not
+match `codegen.versions`.
+
 ## Upgrade Notes
 
 This revision is a breaking template change: generated handlers are served by

@@ -45,7 +45,8 @@ GOLANGCI_LINT   ?= golangci-lint
 INTERNAL_TOOLS  ?= $(GO) run -tags spheretools
 
 .PHONY: \
-	build build/all clean\
+	build build/all clean \
+	codegen-check codegen-baseline \
 	gen/wire gen/conf gen/deps gen/proto gen/all \
 	build/docker build/multi-docker \
 	run run/race deps-update tidy test lint fmt check \
@@ -87,6 +88,13 @@ gen/proto: ## Generate proto files and run protoc plugins
 
 gen/all: clean gen/proto gen/wire fmt ## Generate all code
 	$(MAKE) tidy
+
+# Generated api/** is gitignored; codegen.sha256 is its tracked digest baseline.
+codegen-check: ## Compare generated api/** with the codegen.sha256 baseline
+	./scripts/codegen-digest.sh check
+
+codegen-baseline: ## Record generated api/** digests in codegen.sha256
+	./scripts/codegen-digest.sh update
 
 # ---------- Build Docker ----------
 build/docker: ## Build docker image
