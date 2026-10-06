@@ -17,13 +17,8 @@ import (
 	"github.com/go-sphere/sphere/server/httpz"
 )
 
-// The error parser is a process-wide singleton: httpsrv installs it with
-// httpz.SetDefaultErrorParser in init(), which has already run by the time any
-// test in this binary starts. These tests exercise that installed parser
-// through a real engine and never call SetDefaultErrorParser themselves, so
-// nothing leaks between tests and the parser under test is exactly the one
-// production uses. A future test that must swap the parser has to restore it
-// with t.Cleanup and must not run in parallel with these.
+// httpsrv installs the process-wide error parser in init(); these tests use it
+// as installed. A test that swaps it must restore it and must not run in parallel.
 
 // serveError mounts a single route that fails with err and returns the HTTP
 // status and decoded error envelope a client receives for it.
