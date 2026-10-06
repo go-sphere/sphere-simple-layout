@@ -25,6 +25,7 @@
       "buf.yaml",
       "cmd/app/Dockerfile",
       "cmd/tools/**",
+      "codegen.versions",
       "docs/LAYOUT_CONTRACT.md",
       "internal/pkg/app/**",
       "internal/pkg/httpsrv/**"
