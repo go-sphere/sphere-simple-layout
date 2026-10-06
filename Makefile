@@ -46,7 +46,7 @@ INTERNAL_TOOLS  ?= $(GO) run -tags spheretools
 
 .PHONY: \
 	build build/all clean \
-	codegen-check codegen-baseline \
+	codegen-check codegen-baseline codegen-verify \
 	gen/wire gen/conf gen/deps gen/proto gen/all \
 	build/docker build/multi-docker \
 	run run/race deps-update tidy test lint fmt check \
@@ -95,6 +95,9 @@ codegen-check: ## Compare generated api/** with the codegen.sha256 baseline
 
 codegen-baseline: ## Record generated api/** digests in codegen.sha256
 	./scripts/codegen-digest.sh update
+
+codegen-verify: ## Regenerate api/** with pinned plugins; check idempotency and baseline
+	./scripts/verify-codegen.sh
 
 # ---------- Build Docker ----------
 build/docker: ## Build docker image

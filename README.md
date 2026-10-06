@@ -45,6 +45,10 @@ Generated `api/**` is not committed, so `codegen.sha256` records the SHA-256
 of every generated `api/**` file as the tracked regression baseline:
 
 - `make codegen-check` compares the current `api/**` with the baseline.
+- `make codegen-verify` regenerates `api/**` with the pinned plugins in a
+  temporary tool directory and checks that the generated packages build, that
+  generation is idempotent, and that the output matches the baseline. The
+  Codegen workflow runs it on every push.
 - `make codegen-baseline` rewrites the baseline from the current `api/**`.
 
 After changing Proto files or bumping a generator, run
