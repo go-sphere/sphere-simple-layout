@@ -25,7 +25,10 @@ func init() {
 		if _, ok := errors.AsType[*http.MaxBytesError](err); ok {
 			return 0, http.StatusRequestEntityTooLarge, http.StatusText(http.StatusRequestEntityTooLarge)
 		}
-		return httpx.ParseError(err)
+		// httpz.ParseError, not httpx.ParseError: it also classifies the
+		// storage sentinels (ErrNotFound, ErrDestExists, ErrFileNameInvalid),
+		// which carry no status of their own and would render as 500.
+		return httpz.ParseError(err)
 	})
 }
 

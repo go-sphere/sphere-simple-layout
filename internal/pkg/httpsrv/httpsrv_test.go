@@ -15,6 +15,7 @@ import (
 	apiv1 "github.com/go-sphere/sphere-simple-layout/api/api/v1"
 	"github.com/go-sphere/sphere-simple-layout/internal/pkg/httpsrv"
 	"github.com/go-sphere/sphere/server/httpz"
+	"github.com/go-sphere/sphere/storage/storageerr"
 )
 
 // httpsrv installs the process-wide error parser in init(); these tests use it
@@ -81,7 +82,7 @@ func TestErrorParserRendersValidationErrorAsBadRequest(t *testing.T) {
 	}
 }
 
-func TestErrorParserFallsBackToHTTPXParseError(t *testing.T) {
+func TestErrorParserFallsBackToParseError(t *testing.T) {
 	tests := []struct {
 		name        string
 		err         error
@@ -94,6 +95,26 @@ func TestErrorParserFallsBackToHTTPXParseError(t *testing.T) {
 			err:         httpx.NewNotFoundError("resource missing"),
 			wantStatus:  http.StatusNotFound,
 			wantMessage: "resource missing",
+		},
+		{
+			// A storage sentinel carries no status of its own; only
+			// httpz.ParseError classifies it, httpx.ParseError answers 500.
+			name:        "storage not found",
+			err:         storageerr.ErrNotFound,
+			wantStatus:  http.StatusNotFound,
+			wantMessage: http.StatusText(http.StatusNotFound),
+		},
+		{
+			name:        "wrapped storage destination exists",
+			err:         fmt.Errorf("move upload: %w", storageerr.ErrDestExists),
+			wantStatus:  http.StatusBadRequest,
+			wantMessage: http.StatusText(http.StatusBadRequest),
+		},
+		{
+			name:        "storage invalid filename",
+			err:         storageerr.ErrFileNameInvalid,
+			wantStatus:  http.StatusBadRequest,
+			wantMessage: http.StatusText(http.StatusBadRequest),
 		},
 		{
 			name:        "generated proto error enum",
