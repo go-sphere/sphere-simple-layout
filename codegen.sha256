@@ -1,4 +1,4 @@
 # module github.com/go-sphere/sphere-simple-layout
-6543d0dfb429f11315360cede7ba2a399e6b946091f679191249f438531322ca  api/api/v1/greet.errors.pb.go
+050565d0cffc605f36470514ef75b62ddfd6ab0385f21bca8932f57271f0b07d  api/api/v1/greet.errors.pb.go
 21873f3e78d2cef2c938ea559b4f80849ef33927ab2d4bbe983addae9c378100  api/api/v1/greet.pb.go
-de765282dd007b8fd0ca2b96860aac0f491be8e49ecab47bcf294bd6716bb2e4  api/api/v1/greet.sphere.pb.go
+56c26def3bcde7663e69950e6ee50437644214a6e40f7c0b8eb7353c3ef4cefb  api/api/v1/greet.sphere.pb.go
