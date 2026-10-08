@@ -3,5 +3,5 @@ package config
 import "github.com/google/wire"
 
 var ProviderSet = wire.NewSet(
-	wire.FieldsOf(new(*Config), "Environments", "Log", "API"),
+	wire.FieldsOf(new(*Config), "Log", "API"),
 )

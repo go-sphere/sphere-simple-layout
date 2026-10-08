@@ -24,7 +24,7 @@ import (
 // status and decoded error envelope a client receives for it.
 func serveError(t *testing.T, err error) (int, httpz.ErrorResponse) {
 	t.Helper()
-	engine := httpsrv.NewServer("test", "127.0.0.1:0")
+	engine := httpsrv.NewServer("test", "127.0.0.1:0", httpsrv.Options{})
 	engine.Group("/").GET("/fail", httpz.WithJson(func(httpx.Context) (string, error) {
 		return "", err
 	}))
@@ -127,5 +127,13 @@ func TestErrorParserFallsBackToHTTPXParseError(t *testing.T) {
 				t.Errorf("response leaks the raw error: %+v", body)
 			}
 		})
+	}
+}
+
+func TestErrorParserRendersBodyCapAsRequestEntityTooLarge(t *testing.T) {
+	// A binder wraps the read error as a 400; the cap must still win.
+	status, _ := serveError(t, httpx.WrapBindError(&http.MaxBytesError{Limit: 64}))
+	if status != http.StatusRequestEntityTooLarge {
+		t.Fatalf("status = %d, want %d", status, http.StatusRequestEntityTooLarge)
 	}
 }

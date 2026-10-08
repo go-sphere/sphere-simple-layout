@@ -3,6 +3,7 @@ package config
 import (
 	"os"
 	"path/filepath"
+	"strings"
 	"testing"
 )
 
@@ -30,4 +31,24 @@ func writeConfig(t *testing.T, content string) string {
 		t.Fatalf("write config: %v", err)
 	}
 	return path
+}
+
+func TestNewConfigLoadsHTTPServerOptions(t *testing.T) {
+	config, err := NewConfig(writeConfig(t, `{"api":{"http":{
+		"trusted_proxies":["10.0.0.0/8"],"max_body_bytes":1024,"read_timeout_seconds":5,"idle_timeout_seconds":-1}}}`))
+	if err != nil {
+		t.Fatalf("NewConfig() error = %v", err)
+	}
+	got := config.API.HTTP.Options
+	if len(got.TrustedProxies) != 1 || got.TrustedProxies[0] != "10.0.0.0/8" ||
+		got.MaxBodyBytes != 1024 || got.ReadTimeoutSeconds != 5 || got.IdleTimeoutSeconds != -1 {
+		t.Errorf("API.HTTP options = %+v", got)
+	}
+}
+
+func TestNewConfigRejectsInvalidTrustedProxy(t *testing.T) {
+	_, err := NewConfig(writeConfig(t, `{"api":{"http":{"trusted_proxies":["proxy.internal"]}}}`))
+	if err == nil || !strings.Contains(err.Error(), "api http: trusted_proxies") {
+		t.Fatalf("NewConfig() error = %v, want a api http trusted_proxies error", err)
+	}
 }

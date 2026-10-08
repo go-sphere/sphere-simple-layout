@@ -12,6 +12,7 @@ import (
 	"time"
 
 	apiv1 "github.com/go-sphere/sphere-simple-layout/api/api/v1"
+	"github.com/go-sphere/sphere-simple-layout/internal/pkg/httpsrv"
 	service "github.com/go-sphere/sphere-simple-layout/internal/service/api"
 )
 
@@ -150,4 +151,13 @@ func TestGreetRouteContract(t *testing.T) {
 			t.Fatalf("status = %d, want 404", status)
 		}
 	})
+}
+
+func TestOversizedBodyIsRejectedWith413(t *testing.T) {
+	baseURL := startTestWeb(t)
+	body := `{"name":"` + strings.Repeat("a", int(httpsrv.DefaultMaxBodyBytes)) + `"}`
+	status, env := do(t, baseURL, http.MethodPost, "/v1/greet", body)
+	if status != http.StatusRequestEntityTooLarge || env.Success {
+		t.Fatalf("status = %d success = %v, want 413 false; message=%q", status, env.Success, env.Message)
+	}
 }

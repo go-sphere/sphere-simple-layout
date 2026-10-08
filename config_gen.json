@@ -1,5 +1,4 @@
 {
-  "environments": {},
   "log": {
     "file": {
       "file_name": "./var/log/sphere.log",
@@ -15,7 +14,11 @@
   "api": {
     "http": {
       "address": "0.0.0.0:8899",
-      "cors": null
+      "cors": null,
+      "read_timeout_seconds": 0,
+      "idle_timeout_seconds": 0,
+      "max_body_bytes": 0,
+      "trusted_proxies": null
     }
   }
 }

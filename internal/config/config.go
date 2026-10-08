@@ -1,6 +1,8 @@
 package config
 
 import (
+	"fmt"
+
 	"github.com/go-sphere/confstore"
 	"github.com/go-sphere/confstore/codec"
 	"github.com/go-sphere/confstore/provider/file"
@@ -11,14 +13,12 @@ import (
 var BuildVersion = "dev"
 
 type Config struct {
-	Environments map[string]string `json:"environments" yaml:"environments"`
-	Log          zapx.Config       `json:"log" yaml:"log"`
-	API          api.Config        `json:"api" yaml:"api"`
+	Log zapx.Config `json:"log" yaml:"log"`
+	API api.Config  `json:"api" yaml:"api"`
 }
 
 func NewEmptyConfig() *Config {
 	return &Config{
-		Environments: map[string]string{},
 		Log: zapx.Config{
 			File: zapx.FileConfig{
 				FileName:   "./var/log/sphere.log",
@@ -44,6 +44,9 @@ func NewConfig(path string) (*Config, error) {
 	}
 	if config.Log.Level == "" {
 		config.Log.Level = "info"
+	}
+	if err := config.API.HTTP.Validate(); err != nil {
+		return nil, fmt.Errorf("api http: %w", err)
 	}
 	return config, nil
 }
