@@ -76,8 +76,8 @@ gen/conf: ## Generate example config; write config.json only if missing
 	$(INTERNAL_TOOLS) ./cmd/tools/config gen --output config_gen.json
 	@if [ ! -f config.json ]; then cp config_gen.json config.json; fi
 
-# Refresh the buf dependencies in buf.lock. Kept out of gen/proto so that
-# generation itself is reproducible from the committed lock; `init` runs it.
+# Refresh the buf dependencies in buf.lock. Run it deliberately and commit the
+# result: generation, `init` included, uses the committed lock as is.
 gen/deps: ## Refresh buf dependencies
 	$(BUF_CLI) dep update
 	$(BUF_CLI) dep prune
@@ -166,13 +166,15 @@ install: ## Install pinned development tools (versions in codegen.versions)
 	$(GO_INSTALL) github.com/go-sphere/protoc-gen-sphere-errors@$(PROTOC_GEN_SPHERE_ERRORS_VERSION)
 	$(GO_INSTALL) github.com/go-sphere/protoc-gen-sphere-binding@$(PROTOC_GEN_SPHERE_BINDING_VERSION)
 
+# The baseline is recorded last: generated code embeds the module path, which
+# differs in a project scaffolded from this layout.
 init: ## Init all dependencies
 	$(GO) mod download
 	$(MAKE) install
 	$(MAKE) gen/all
-	$(MAKE) gen/deps
 	$(GO) mod tidy
 	$(MAKE) gen/conf
+	$(MAKE) codegen-baseline
 
 help: ## Show this help message
 	@echo "\n\033[1mSphere build tool.\033[0m Usage: make [target]\n"
