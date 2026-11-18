@@ -130,6 +130,36 @@ func TestGreetRouteContract(t *testing.T) {
 		}
 	})
 
+	t.Run("valid request without title", func(t *testing.T) {
+		for _, target := range []string{"/v1/greet", "/v1/greet?title=%20%20"} {
+			status, env := do(t, baseURL, http.MethodPost, target, `{"name":"Ada"}`)
+			if status != http.StatusOK || !env.Success {
+				t.Fatalf("%s: status = %d success = %v, want 200 true; message=%q", target, status, env.Success, env.Message)
+			}
+			var data apiv1.GreetResponse
+			if err := json.Unmarshal(env.Data, &data); err != nil {
+				t.Fatalf("decode data: %v", err)
+			}
+			if got, want := data.Message, "Hello Ada!"; got != want {
+				t.Errorf("%s: message = %q, want %q", target, got, want)
+			}
+		}
+	})
+
+	t.Run("valid request with padded title", func(t *testing.T) {
+		status, env := do(t, baseURL, http.MethodPost, "/v1/greet?title=%20Dr%20", `{"name":"Ada"}`)
+		if status != http.StatusOK || !env.Success {
+			t.Fatalf("status = %d success = %v, want 200 true; message=%q", status, env.Success, env.Message)
+		}
+		var data apiv1.GreetResponse
+		if err := json.Unmarshal(env.Data, &data); err != nil {
+			t.Fatalf("decode data: %v", err)
+		}
+		if got, want := data.Message, "Hello Dr Ada!"; got != want {
+			t.Errorf("message = %q, want %q", got, want)
+		}
+	})
+
 	t.Run("validation failure is a 400 with the violation", func(t *testing.T) {
 		status, env := do(t, baseURL, http.MethodPost, "/v1/greet", `{"name":""}`)
 		if status != http.StatusBadRequest || env.Success {
