@@ -186,8 +186,32 @@ func TestGreetRouteContract(t *testing.T) {
 func TestOversizedBodyIsRejectedWith413(t *testing.T) {
 	baseURL := startTestWeb(t)
 	body := `{"name":"` + strings.Repeat("a", int(httpsrv.DefaultMaxBodyBytes)) + `"}`
-	status, env := do(t, baseURL, http.MethodPost, "/v1/greet", body)
-	if status != http.StatusRequestEntityTooLarge || env.Success {
-		t.Fatalf("status = %d success = %v, want 413 false; message=%q", status, env.Success, env.Message)
+	req, err := http.NewRequest(http.MethodPost, baseURL+"/v1/greet", strings.NewReader(body))
+	if err != nil {
+		t.Fatal(err)
+	}
+	req.Header.Set("Content-Type", "application/json")
+	// The server answers 413 from the declared Content-Length without reading
+	// the body, then closes the connection. Waiting for that answer
+	// (Expect: 100-continue) keeps the client from streaming a body the server
+	// will not read, which would race the close and fail as a connection reset.
+	req.Header.Set("Expect", "100-continue")
+	transport := &http.Transport{ExpectContinueTimeout: time.Second}
+	defer transport.CloseIdleConnections()
+	resp, err := (&http.Client{Timeout: 2 * time.Second, Transport: transport}).Do(req)
+	if err != nil {
+		t.Fatalf("POST /v1/greet: %v", err)
+	}
+	defer func() { _ = resp.Body.Close() }()
+	raw, err := io.ReadAll(resp.Body)
+	if err != nil {
+		t.Fatalf("read body: %v", err)
+	}
+	var env envelope
+	if err := json.Unmarshal(raw, &env); err != nil {
+		t.Fatalf("body is not JSON: %v; body=%q", err, raw)
+	}
+	if resp.StatusCode != http.StatusRequestEntityTooLarge || env.Success {
+		t.Fatalf("status = %d success = %v, want 413 false; message=%q", resp.StatusCode, env.Success, env.Message)
 	}
 }
